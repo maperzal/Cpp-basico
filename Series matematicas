@@ -1,0 +1,100 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+float Factorial(const float &x, const float& k);
+float Serie_Geometrica(const float &x,const int &n);
+float Serie_Logaritmica(const float &x,const int &n);
+float Serie_Exponencial(const float &x, const float &n);
+float Serie_Seno(const float &x, const int &n);
+;
+int main(){
+
+	float x,sergeo,serlog,serexp,sersen;
+	int n; 
+
+	cout << " CALCULO DE VALORES DISTINTAS SERIES GEOMETRICAS: " << endl;
+	cout << "  Introduce el valor de X: ";
+	cin >>  x;
+	cout << "  Introduce el numero de sucesiones a usar -> n = : ";
+	cin >> n;
+	
+	if((x>1)||(x<-1)){
+		cout << endl << "	LA SERIE GEOMETRICA debe estar en el rango (-1>x && x<1) "<< endl;
+		cout << endl << "	LA SERIE LOGARITMICA debe estar en el rango (-1>x && x<1) "<< endl;
+	}else{
+		//FUNCION GEOMETRICA
+		sergeo = Serie_Geometrica(x,n);
+		cout << endl <<  "	Resultado serie geometrica: "<< sergeo << " " << endl;
+		//FUNCION LOGARITMICA
+		serlog = Serie_Logaritmica(x,n);
+		cout << endl << "	Resultado serie Logaritmica: " << serlog << " " << endl;
+	}
+	//FUNCION EXPONENCIAL
+	serexp = Serie_Exponencial(x,n);
+	cout << endl << "	Resultado serie exponencial: " << serexp << " " << endl;
+	//FUNCION SENO
+	sersen = Serie_Seno(x,n);
+	cout << endl << "	Resultado serie seno: " << sersen << " " << endl << endl;
+
+	return 0;
+}
+/* IMPLEMENTACION DE LOS SUBPROGRAMAS(FUNCIONES)	*/
+float Factorial(const float &x, const float& k){
+	int fac = 1;
+	for(int i = 2; i<=k; i++){
+		fac = fac*i;
+	}
+	return fac;
+}
+float Serie_Geometrica(const float &x,const int &n){
+
+	float s = 1;
+	float res = 0;	
+	for(int i = 1; i<n; ++i){ //En la serie geometrica X-1 corresponde al exponente de mayor grado.
+		s = s*x;
+		res += s; 
+	}
+
+	return res+1;
+}
+float Serie_Logaritmica(const float &x,const int &n){ 
+
+	float s = 1;
+	float signo = -1;
+	float res = 0;
+	for(int i = 1; i<= n-1; ++i){
+		signo *= -1;
+		s = s*x;
+		res += (s/i)*signo;
+	}
+	return res;
+}
+float Serie_Exponencial(const float &x, const float &n){
+
+	float s = x;
+	float t = 1+x;	
+	float fac,res;
+	res = 0;//Si no estuviera, el resultado saldria 'X.9999' en lugar de X+1 
+	for(float j = 2; j<n; ++j){
+
+		fac = Factorial(x,j);
+		s = s*x;
+		res += s/fac;
+	}
+	return res+t;
+}
+float Serie_Seno(const float &x, const int &n){
+	
+	float s = 1;
+	float signo = 1;
+	float fac;
+	float res = x;	
+	for (int k = 3; k<=n+4; k+=2){
+		signo *=-1;
+		s = pow(x,k);//Funcion propia de C++, si queremos hacer la nuestra propia habria que hacer como Factorial.
+		fac = Factorial(x,k);//Interesante hacer funcion factorial aqui, por la condicion del bucle for
+		res = res + (signo*(s/fac));			
+	}
+	return res;
+}
