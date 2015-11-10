@@ -1,0 +1,55 @@
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	
+	char men;
+	int a,b,c,d;
+	cout << "Recuento votos partidos candidatos: " << endl;
+	cout << "	PARTIDOS CANDIDATOS	" << endl;
+	cout << "A. PP " << endl;
+	cout << "B. PSOE " << endl;
+	cout << "C. PODEMOS " << endl;
+	cout << "D. CIUDADANOS " << endl;
+	cout << "F. SALIR " << endl;
+
+	a = 0;
+	b = 0; 
+	c = 0;
+	d = 0;
+	
+	do{	
+		cin >> men;
+		switch(men){
+			case 'A':
+				a++;
+				cout << a << endl;
+				break;
+			case 'B':
+				b++;
+				cout << b << endl;
+				break;
+			case 'C':
+				c++;
+				cout << c << endl;
+				break;
+			case 'D':
+				d++;
+				cout << d << endl;
+				break;	
+	
+			default:
+				cout << "Introduce una letra correcta. "<< endl;
+				break;
+		}
+	}while(men != 'F');
+	
+	cout << "Contador de votos: " << endl;
+	cout << "A: " << a << endl;
+	cout << "B: " << b << endl;
+	cout << "C: " << c << endl;
+	cout << "D: " << d << endl;	
+	cout << "Numero total de votos contados: " << a+b+c+d << endl;
+	return 0;	
+}
